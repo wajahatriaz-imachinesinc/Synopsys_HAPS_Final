@@ -1,75 +1,106 @@
-# ProtoCompiler generated directories
-RCPU/
-RCPU_reports/
-pp0_area/
-synthesis_files/
-synlog/
+# Build Artifacts & Temporary Files
+═══════════════════════════════════════════════════════════════
 
-# VCS/Simulation generated directories
-top_ucdb/
-work.lib++/
-work/
-xsim.dir/
-
-# ModelSim/QuestaSim simulation artifacts
-vsim.wlf
-transcript
-*.cr.mti
-tcl_stacktrace.txt
-vish_stacktrace.vstf
-
-# Environment setup (machine-specific)
-proto_env.bash
-
-# Tool state/marker files
+# Synopsys ProtoCompiler build databases
+.synthesis_compile/
 .synthesis_compile
+work.lib++/
+top_ucdb/
+c0/
+AN.DB/
+libnz4w_r.soLog
+proto_env.bash
+synthesis_files/
+
+# Build reports and logs
+RCPU_reports/
+synlog/
+RCPU/
+RCPU.html
+*.log
+COMPILATION_STATUS_*.txt
 .synthesis_fail
 
-# Generated bitstreams and build artifacts
-*.bit
-*.mcs
-*.elf
-*.bin
-
-# Tool logs and reports
-*.log
-*.log.*
-protocompiler*.log*
-RCPU.html
-synlog.tcl
-version_info.txt
-vlogan.log
-
-# Tool-generated databases and metadata
-*.db
-*.rpt
-*.srr
-*.csv
-fpga_data.info
-AN.DB/
-
-# VCS/Simulation generated files
-vcs_dut.csh
-*.shm
+# Simulation artifacts (old)
+src/validation/work/
 *.wdb
-*.vcd
+*.shm
+xsim.dir/
 
-# Vivado generated directories
-.Xil/
-.cache/
-.ip_user_files/
+# Vivado build artifacts
 *.jou
 *.pb
-libnz4w_r.soLog/
+.Xil/
+vivado_srs/
+*/vivado_srs/
+*.dcp
+*.edf
+pp0_area/
+*.est
 
-# Editor backups and temp files
+# Runtime generated files - EXCLUDE everything from UC_LED_DEMO_runtime
+UC_LED_DEMO_runtime/
+UC_LED_DEMO_runtime/**/*
+
+# ModelSim/VCS artifacts
+work/
+transcript
+*.vcd
+*.vpd
+*.fsdb
+
+# VCS specific
+xcelium.d/
+xcelium.so
+xcelium.key
+
+# Temporary files
 *~
+*.tmp
+*.bak
 *.swp
 *.swo
 .DS_Store
 
-# Optional tool-specific
-.vivado_init.tcl
+# Cache directories
+__pycache__/
+*.pyc
+.cache/
+.pytest_cache/
 
-# Session/compilation status files (auto-generated)
-COMPILATION_STATUS_*.txt
+# User preferences
+.vscode/settings.json
+.idea/
+*.iml
+
+# Documentation to consolidate (kept for reference, can delete)
+# These have been merged into README.md
+# DEPLOYMENT_CHECKLIST.md
+# DEPLOYMENT_READY.md
+# DEPLOYMENT_SOLVED.txt
+# FOLDER_CONTENTS_ANALYSIS.md
+# QUICK_START_DEPLOYMENT.md
+# UNTOUCHED_FOLDERS_REFERENCE.md
+# DOCUMENTATION_CONSOLIDATED.txt
+# FINAL_DEPLOYMENT_SUMMARY.txt
+
+# Large archives (if created)
+*.tar.gz
+*.zip
+*.rar
+
+# Keep these (essential files)
+!README.md
+!.gitignore
+!deploy.sh
+!run.tcl
+!board.tss
+!design.fdc
+!uc_compile.utf
+!vlog_inputs.txt
+!version_info.txt
+!setup_environment.sh
+
+# Keep source and docs
+!src/
+!docs/

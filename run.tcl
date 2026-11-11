@@ -22,4 +22,8 @@ launch protocompiler -script ./synthesis_files/FB1_F0/FB1_F0_srs.tcl -script ./s
 launch vivado -script ./synthesis_files/FB1_F0/vivado_srs/run_vivado_haps.tcl -script ./synthesis_files/FB1_F1/vivado_srs/run_vivado_haps.tcl
 
 export runtime -path UC_LED_DEMO_runtime
-exec copybit.sh
+
+# Next steps for deployment:
+# 1. Program HAPS-200 board with PDI files
+# 2. Run functional tests with hRun  
+# 3. Deploy to hardware

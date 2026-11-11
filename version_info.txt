@@ -1,0 +1,10 @@
+External Tools                Supported Version             Install Environment Variable
+HAPS (R) ProtoCompiler 100    V-2025.06-3.6                 [Install path]=/edatools/synopsys/protocomp/V-2025.06-3.6
+Vivado                        2025.2-REL1                   XILINX_VIVADO=/edatools/xilinx/vivado/2025.2_REL1/Vivado
+Formality                     W-2024.09-SP5                 FORMALITY=""
+Verdi                         W-2024.09-SP2-8               VERDI_HOME=/edatools/synopsys/verdi/W-2024.09-SP2-5-HP-2506-3
+VC Formal                     W-2024.09-SP2-8               VC_STATIC_HOME=""
+Confpro                       V-2025.06-3                   HAPS_INSTALL_DIR=/edatools/synopsys/protocomp/V-2025.06-3.6
+Design Compiler               W-2024.09-SP5                 DC_ROOT=""
+VCS                           W-2024.09-SP2-5               VCS_HOME=/edatools/synopsys/vcs/W-2024.09-SP2-5-PC
+Virtualizer                   W-2025.03                     SNPS_VP_HOME=""
