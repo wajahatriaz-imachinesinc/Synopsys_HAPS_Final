@@ -5,11 +5,18 @@ pp0_area/
 synthesis_files/
 synlog/
 
+# VCS/Simulation generated directories
+top_ucdb/
+work.lib++/
+work/
+xsim.dir/
+
 # Environment setup (machine-specific)
 proto_env.bash
 
 # Tool state/marker files
 .synthesis_compile
+.synthesis_fail
 
 # Generated bitstreams and build artifacts
 *.bit
@@ -24,6 +31,7 @@ protocompiler*.log*
 RCPU.html
 synlog.tcl
 version_info.txt
+vlogan.log
 
 # Tool-generated databases and metadata
 *.db
@@ -32,6 +40,12 @@ version_info.txt
 *.csv
 fpga_data.info
 AN.DB/
+
+# VCS/Simulation generated files
+vcs_dut.csh
+*.shm
+*.wdb
+*.vcd
 
 # Vivado generated directories
 .Xil/
@@ -46,12 +60,6 @@ libnz4w_r.soLog/
 *.swp
 *.swo
 .DS_Store
-
-# VCS/simulation artifacts
-work/
-xsim.dir/
-*.wdb
-*.vcd
 
 # Optional tool-specific
 .vivado_init.tcl
