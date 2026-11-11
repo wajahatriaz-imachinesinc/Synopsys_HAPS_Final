@@ -67,3 +67,143 @@ After referencing the HAPS document, I added the comment /* synthesis syn_black_
 ![](https://i.imgur.com/fPYQYe2.png)
 
 In the end, all timing constraints were met, which proves the functionality of my design and its operation on HAPS.
+
+---
+
+## Learning Path: From Setup to Mastery
+
+If you're taking over this project or want to understand the HAPS-200 flow from scratch, follow this structured learning path:
+
+### **Phase 1: Fundamentals (Days 1-2)**
+
+**Start with the reference manual:**
+- Read: `/projects/users/wriaz/Synopsys_HAPS_Final/docs/haps-200_12f_reference_manual_v2.pdf`
+- Focus on:
+  1. **Chapters 1-2**: Architecture overview
+  2. **Chapter 3**: HAPS-200 12F hardware specs (FPGAs F0-F11, connectors, voltages)
+  3. **Chapter 4**: HapsTrak connectors and I/O basics
+  4. **Chapter 5**: Clock distribution
+
+**Key concepts to understand:**
+- What is HAPS? (Hardware emulation/prototyping platform)
+- What are FPGAs F0-F11? (12 user FPGA slots per FlexBoard)
+- What are HapsTrak connectors? (60-pin I/O connectors)
+- VCCO voltages (1.0V, 1.1V, 1.2V, 1.35V)
+
+### **Phase 2: Configuration Basics (Days 3-4)**
+
+**Learn Tcl scripting** (lightweight, ~2 hours):
+- `board.tss` files are Tcl scripts
+- Reference: https://www.tcl.tk/man/tcl8.6/tutorial/Tcl.html (first 3 sections)
+
+**Study the reference design:**
+```
+/projects/users/wriaz/clone_111026/proto/haps/partition/haps200.tss
+```
+Focus on:
+1. `board_system_create` - How to define HAPS system and add boards
+2. `board_system_configure` - Clock, voltages, I/O configuration
+3. `board_system_create -interconnect` - Inter-FPGA connections
+
+### **Phase 3: Building Block Examples (Days 5-6)**
+
+**Create simple configs from scratch:**
+
+**Example 1: Minimal config (1 FPGA, 1 clock)**
+```tcl
+board_system_create -haps -name IM_HAPS200
+board_system_create -add HAPS200_6F_2 -name FB1 -stack_through none
+board_system_configure -clk_src PLL -frequency 22M -name GCLK_USER_CLK
+board_system_configure -clock {FB1.F0.CLK1} GCLK_USER_CLK
+```
+
+**Example 2: Multi-FPGA config (Add F1, interconnect)**
+```tcl
+board_system_create -interconnect -manual CON_CABLE_50_HT3 \
+  -name FB1_F0_F1 -connector {FB1.F0_X1 FB1.F1_X1}
+board_system_configure -clock {FB1.F1.CLK1} GCLK_USER_CLK
+board_system_configure -voltage {FB1.F0_X1 FB1.F1_X1} 1.2
+```
+
+**Example 3: DDR4 memory config**
+```tcl
+board_system_create -interconnect -manual DDR4_S32GBF_HT3 \
+  -name DDR4_FB1F0 -connector {FB1.F0_X1 FB1.F0_X2 FB1.F0_X3}
+board_system_configure -voltage {FB1.F0_X1 FB1.F0_X2 FB1.F0_X3} 1.2
+```
+
+### **Phase 4: Partition Constraints (Days 7-8)**
+
+**Learn partition.pcf:**
+- `assign_cell` - Map logic to specific FPGAs
+- `assign_global_net` - Assign clocks to logic
+- `bin_attribute` - Lock unused FPGAs
+- `reset_synchronize` - Handle async resets
+
+Study reference:
+```
+/projects/users/wriaz/clone_111026/proto/haps/partition/haps200.pcf
+```
+
+### **Phase 5: Complete Flow (Days 9-10)**
+
+**Understand run.tcl steps:**
+1. `database load RCPU -technology HAPS-200` - Initialize database
+2. `launch uc` - Compile RTL with ProtoCompiler
+3. `run pre_partition` - Check board.tss validity
+4. `run partition` - Map design to FPGAs
+5. `run system_route` - Route inter-FPGA connections
+6. `run system_generate` - Generate Vivado scripts
+7. `launch protocompiler` - Synthesize per FPGA
+8. `launch vivado` - Place & Route per FPGA
+
+### **Recommended Study Schedule:**
+
+```
+Week 1:
+  Mon: Manual chapters 1-5 (2 hrs)
+  Tue: Tcl basics (2 hrs)
+  Wed: Study reference board.tss (3 hrs)
+  Thu: Build minimal configs (3 hrs)
+  Fri: Multi-FPGA + DDR4 (3 hrs)
+
+Week 2:
+  Mon: Learn partition.pcf (3 hrs)
+  Tue: Build partition constraints (3 hrs)
+  Wed: Understand run.tcl flow (2 hrs)
+  Thu: Run complete flow with your design (4 hrs)
+  Fri: Debug and optimize (4 hrs)
+```
+
+### **Hands-On Projects:**
+
+1. **Project 1**: Create a 2-FPGA config with shared clock
+2. **Project 2**: Add DDR4 memory to one FPGA
+3. **Project 3**: Partition a simple adder across 2 FPGAs
+4. **Project 4**: Full compile flow with timing analysis
+
+### **Key Files to Study:**
+
+| File | Purpose |
+|------|---------|
+| `board.tss` | HAPS system configuration (FPGAs, clocks, interconnects) |
+| `partition.pcf` | Design partition constraints (cell-to-FPGA mapping) |
+| `run.tcl` | ProtoCompiler workflow (compile, partition, generate) |
+| `design.fdc` | Design constraints (frequency, timing) |
+| `uc_compile.utf` | RTL compilation config |
+
+### **Common Connector Naming Convention:**
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `FB#.F#_X#` | `FB1.F0_X1` | FlexBoard 1, FPGA Slot 0, HapsTrak connector 1 |
+| | `FB1.F1_X16` | FlexBoard 1, FPGA Slot 1, HapsTrak connector 16 |
+| | `FB1.F0_X30` | FlexBoard 1, FPGA Slot 0, HapsTrak connector 30 |
+
+### **Architecture Reference:**
+
+- **HAPS-200 6F_2**: 6 FPGA slots (F0-F5) per FlexBoard, 2 FlexBoards stackable
+- **HAPS-200 12F**: 12 FPGA slots (F0-F11) per module
+- **Each FPGA**: 18 HapsTrak 4 connectors (54 pins each)
+- **Voltages**: 1.0V, 1.1V, 1.2V, 1.35V (HapsTrak 4)
+- **Inter-connect**: Every FPGA connects to every other FPGA internally

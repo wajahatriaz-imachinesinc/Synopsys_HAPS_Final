@@ -1,0 +1,56 @@
+# ProtoCompiler generated directories
+RCPU/
+RCPU_reports/
+pp0_area/
+synthesis_files/
+
+# Environment setup (machine-specific)
+proto_env.bash
+
+# Generated bitstreams and build artifacts
+*.bit
+*.mcs
+*.elf
+*.bin
+
+# Tool logs and reports
+*.log
+*.log.*
+protocompiler*.log*
+RCPU.html
+synlog.tcl
+version_info.txt
+
+# Tool-generated databases and metadata
+*.db
+*.rpt
+*.srr
+*.csv
+*.txt
+!README.md
+!design.fdc
+!board.tss
+!partition.pcf
+!run.tcl
+
+# Vivado generated directories
+.Xil/
+.cache/
+.ip_user_files/
+*.jou
+*.pb
+
+# Editor backups and temp files
+*~
+*.swp
+*.swo
+.DS_Store
+
+# VCS/simulation artifacts
+work/
+xsim.dir/
+*.wdb
+*.vcd
+
+# Optional tool-specific
+.vivado_init.tcl

@@ -6,92 +6,92 @@ tdm_control -max_ratio 16
 #tdm_control -max_ratio 8 
 
 #cell assign
-bin_attribute {FB1.uC FB1.uD} -locked
-#assign_cell {adder} {FB1.uA}
-#assign_cell {led_inst1 led_inst2} {FB1.uB}
-#assign_cell {alu Register_File ALU_controller} {FB1.uB}
+bin_attribute {FB1.F2 FB1.F3 FB1.F4 FB1.F5} -locked
+#assign_cell {adder} {FB1.F0}
+#assign_cell {led_inst1 led_inst2} {FB1.F1}
+#assign_cell {alu Register_File ALU_controller} {FB1.F1}
 
-#Global clock assign
-assign_global_net {clk} {GCLK1}
-#assign_global_net {clk2} {GCLK2}
+# Global clock assign
+assign_global_net {clk} {GCLK_USER_CLK}
+# assign_global_net {clk2} {GCLK_AUX_CLK}
 
 #reset
-assign_virtual_port -port {reset_n} -type USR_LOCAL_RESET -bin {FB1.uA}
+assign_virtual_port -port {reset_n} -type USR_LOCAL_RESET -bin {FB1.F0}
 reset_synchronize -toplevel_net {reset_n} -clock {clk} -init {0} -extra_pipeline_stages {2}
 
 #TOP IO assign
-assign_port {AddrOut[0]} {TOP_IO_HT3_FB1_B5/A[2]}
-assign_port {AddrOut[1]} {TOP_IO_HT3_FB1_B5/A[3]}
-assign_port {AddrOut[2]} {TOP_IO_HT3_FB1_B5/A[4]}
-assign_port {AddrOut[3]} {TOP_IO_HT3_FB1_B5/A[5]}
-assign_port {AddrOut[4]} {TOP_IO_HT3_FB1_B5/A[6]}
-assign_port {AddrOut[5]} {TOP_IO_HT3_FB1_B5/A[7]}
-assign_port {AddrOut[6]} {TOP_IO_HT3_FB1_B5/A[8]}
-assign_port {AddrOut[7]} {TOP_IO_HT3_FB1_B5/A[9]}
-assign_port {AddrOut[8]} {TOP_IO_HT3_FB1_B5/A[10]}
-assign_port {AddrOut[9]} {TOP_IO_HT3_FB1_B5/A[11]}
+#assign_port {AddrOut[0]} {TOP_IO_HT3_FB1_B5/A[2]}
+#assign_port {AddrOut[1]} {TOP_IO_HT3_FB1_B5/A[3]}
+#assign_port {AddrOut[2]} {TOP_IO_HT3_FB1_B5/A[4]}
+#assign_port {AddrOut[3]} {TOP_IO_HT3_FB1_B5/A[5]}
+#assign_port {AddrOut[4]} {TOP_IO_HT3_FB1_B5/A[6]}
+#assign_port {AddrOut[5]} {TOP_IO_HT3_FB1_B5/A[7]}
+#assign_port {AddrOut[6]} {TOP_IO_HT3_FB1_B5/A[8]}
+#assign_port {AddrOut[7]} {TOP_IO_HT3_FB1_B5/A[9]}
+#assign_port {AddrOut[8]} {TOP_IO_HT3_FB1_B5/A[10]}
+#assign_port {AddrOut[9]} {TOP_IO_HT3_FB1_B5/A[11]}
 
-assign_port {AddrOut[10]} {TOP_IO_HT3_FB1_B5/B[2]}
-assign_port {AddrOut[11]} {TOP_IO_HT3_FB1_B5/B[3]}
-assign_port {AddrOut[12]} {TOP_IO_HT3_FB1_B5/B[4]}
-assign_port {AddrOut[13]} {TOP_IO_HT3_FB1_B5/B[5]}
-assign_port {AddrOut[14]} {TOP_IO_HT3_FB1_B5/B[6]}
-assign_port {AddrOut[15]} {TOP_IO_HT3_FB1_B5/B[7]}
-assign_port {AddrOut[16]} {TOP_IO_HT3_FB1_B5/B[8]}
-assign_port {AddrOut[17]} {TOP_IO_HT3_FB1_B5/B[9]}
-assign_port {AddrOut[18]} {TOP_IO_HT3_FB1_B5/B[10]}
-assign_port {AddrOut[19]} {TOP_IO_HT3_FB1_B5/B[11]}
+#assign_port {AddrOut[10]} {TOP_IO_HT3_FB1_B5/B[2]}
+#assign_port {AddrOut[11]} {TOP_IO_HT3_FB1_B5/B[3]}
+#assign_port {AddrOut[12]} {TOP_IO_HT3_FB1_B5/B[4]}
+#assign_port {AddrOut[13]} {TOP_IO_HT3_FB1_B5/B[5]}
+#assign_port {AddrOut[14]} {TOP_IO_HT3_FB1_B5/B[6]}
+#assign_port {AddrOut[15]} {TOP_IO_HT3_FB1_B5/B[7]}
+#assign_port {AddrOut[16]} {TOP_IO_HT3_FB1_B5/B[8]}
+#assign_port {AddrOut[17]} {TOP_IO_HT3_FB1_B5/B[9]}
+#assign_port {AddrOut[18]} {TOP_IO_HT3_FB1_B5/B[10]}
+#assign_port {AddrOut[19]} {TOP_IO_HT3_FB1_B5/B[11]}
 
-assign_port {AddrOut[20]} {TOP_IO_HT3_FB1_B5/C[2]}
-assign_port {AddrOut[21]} {TOP_IO_HT3_FB1_B5/C[3]}
-assign_port {AddrOut[22]} {TOP_IO_HT3_FB1_B5/C[4]}
-assign_port {AddrOut[23]} {TOP_IO_HT3_FB1_B5/C[5]}
-assign_port {AddrOut[24]} {TOP_IO_HT3_FB1_B5/C[6]}
-assign_port {AddrOut[25]} {TOP_IO_HT3_FB1_B5/C[7]}
-assign_port {AddrOut[26]} {TOP_IO_HT3_FB1_B5/C[8]}
-assign_port {AddrOut[27]} {TOP_IO_HT3_FB1_B5/C[9]}
-assign_port {AddrOut[28]} {TOP_IO_HT3_FB1_B5/C[10]}
-assign_port {AddrOut[29]} {TOP_IO_HT3_FB1_B5/C[11]}
+#assign_port {AddrOut[20]} {TOP_IO_HT3_FB1_B5/C[2]}
+#assign_port {AddrOut[21]} {TOP_IO_HT3_FB1_B5/C[3]}
+#assign_port {AddrOut[22]} {TOP_IO_HT3_FB1_B5/C[4]}
+#assign_port {AddrOut[23]} {TOP_IO_HT3_FB1_B5/C[5]}
+#assign_port {AddrOut[24]} {TOP_IO_HT3_FB1_B5/C[6]}
+#assign_port {AddrOut[25]} {TOP_IO_HT3_FB1_B5/C[7]}
+#assign_port {AddrOut[26]} {TOP_IO_HT3_FB1_B5/C[8]}
+#assign_port {AddrOut[27]} {TOP_IO_HT3_FB1_B5/C[9]}
+#assign_port {AddrOut[28]} {TOP_IO_HT3_FB1_B5/C[10]}
+#assign_port {AddrOut[29]} {TOP_IO_HT3_FB1_B5/C[11]}
 
-assign_port {AddrOut[30]} {TOP_IO_HT3_FB1_B5/D[2]}
-assign_port {AddrOut[31]} {TOP_IO_HT3_FB1_B5/D[3]}
+#assign_port {AddrOut[30]} {TOP_IO_HT3_FB1_B5/D[2]}
+#assign_port {AddrOut[31]} {TOP_IO_HT3_FB1_B5/D[3]}
 
 
-assign_port {AddrIn[0]} {TOP_IO_HT3_FB1_B6/A[2]}
-assign_port {AddrIn[1]} {TOP_IO_HT3_FB1_B6/A[3]}
-assign_port {AddrIn[2]} {TOP_IO_HT3_FB1_B6/A[4]}
-assign_port {AddrIn[3]} {TOP_IO_HT3_FB1_B6/A[5]}
-assign_port {AddrIn[4]} {TOP_IO_HT3_FB1_B6/A[6]}
-assign_port {AddrIn[5]} {TOP_IO_HT3_FB1_B6/A[7]}
-assign_port {AddrIn[6]} {TOP_IO_HT3_FB1_B6/A[8]}
-assign_port {AddrIn[7]} {TOP_IO_HT3_FB1_B6/A[9]}
-assign_port {AddrIn[8]} {TOP_IO_HT3_FB1_B6/A[10]}
-assign_port {AddrIn[9]} {TOP_IO_HT3_FB1_B6/A[11]}
+#assign_port {AddrIn[0]} {TOP_IO_HT3_FB1_B6/A[2]}
+#assign_port {AddrIn[1]} {TOP_IO_HT3_FB1_B6/A[3]}
+#assign_port {AddrIn[2]} {TOP_IO_HT3_FB1_B6/A[4]}
+#assign_port {AddrIn[3]} {TOP_IO_HT3_FB1_B6/A[5]}
+#assign_port {AddrIn[4]} {TOP_IO_HT3_FB1_B6/A[6]}
+#assign_port {AddrIn[5]} {TOP_IO_HT3_FB1_B6/A[7]}
+#assign_port {AddrIn[6]} {TOP_IO_HT3_FB1_B6/A[8]}
+#assign_port {AddrIn[7]} {TOP_IO_HT3_FB1_B6/A[9]}
+#assign_port {AddrIn[8]} {TOP_IO_HT3_FB1_B6/A[10]}
+#assign_port {AddrIn[9]} {TOP_IO_HT3_FB1_B6/A[11]}
 
-assign_port {AddrIn[10]} {TOP_IO_HT3_FB1_B6/B[2]}
-assign_port {AddrIn[11]} {TOP_IO_HT3_FB1_B6/B[3]}
-assign_port {AddrIn[12]} {TOP_IO_HT3_FB1_B6/B[4]}
-assign_port {AddrIn[13]} {TOP_IO_HT3_FB1_B6/B[5]}
-assign_port {AddrIn[14]} {TOP_IO_HT3_FB1_B6/B[6]}
-assign_port {AddrIn[15]} {TOP_IO_HT3_FB1_B6/B[7]}
-assign_port {AddrIn[16]} {TOP_IO_HT3_FB1_B6/B[8]}
-assign_port {AddrIn[17]} {TOP_IO_HT3_FB1_B6/B[9]}
-assign_port {AddrIn[18]} {TOP_IO_HT3_FB1_B6/B[10]}
-assign_port {AddrIn[19]} {TOP_IO_HT3_FB1_B6/B[11]}
+#assign_port {AddrIn[10]} {TOP_IO_HT3_FB1_B6/B[2]}
+#assign_port {AddrIn[11]} {TOP_IO_HT3_FB1_B6/B[3]}
+#assign_port {AddrIn[12]} {TOP_IO_HT3_FB1_B6/B[4]}
+#assign_port {AddrIn[13]} {TOP_IO_HT3_FB1_B6/B[5]}
+#assign_port {AddrIn[14]} {TOP_IO_HT3_FB1_B6/B[6]}
+#assign_port {AddrIn[15]} {TOP_IO_HT3_FB1_B6/B[7]}
+#assign_port {AddrIn[16]} {TOP_IO_HT3_FB1_B6/B[8]}
+#assign_port {AddrIn[17]} {TOP_IO_HT3_FB1_B6/B[9]}
+#assign_port {AddrIn[18]} {TOP_IO_HT3_FB1_B6/B[10]}
+#assign_port {AddrIn[19]} {TOP_IO_HT3_FB1_B6/B[11]}
 
-assign_port {AddrIn[20]} {TOP_IO_HT3_FB1_B6/C[2]}
-assign_port {AddrIn[21]} {TOP_IO_HT3_FB1_B6/C[3]}
-assign_port {AddrIn[22]} {TOP_IO_HT3_FB1_B6/C[4]}
-assign_port {AddrIn[23]} {TOP_IO_HT3_FB1_B6/C[5]}
-assign_port {AddrIn[24]} {TOP_IO_HT3_FB1_B6/C[6]}
-assign_port {AddrIn[25]} {TOP_IO_HT3_FB1_B6/C[7]}
-assign_port {AddrIn[26]} {TOP_IO_HT3_FB1_B6/C[8]}
-assign_port {AddrIn[27]} {TOP_IO_HT3_FB1_B6/C[9]}
-assign_port {AddrIn[28]} {TOP_IO_HT3_FB1_B6/C[10]}
-assign_port {AddrIn[29]} {TOP_IO_HT3_FB1_B6/C[11]}
+#assign_port {AddrIn[20]} {TOP_IO_HT3_FB1_B6/C[2]}
+#assign_port {AddrIn[21]} {TOP_IO_HT3_FB1_B6/C[3]}
+#assign_port {AddrIn[22]} {TOP_IO_HT3_FB1_B6/C[4]}
+#assign_port {AddrIn[23]} {TOP_IO_HT3_FB1_B6/C[5]}
+#assign_port {AddrIn[24]} {TOP_IO_HT3_FB1_B6/C[6]}
+#assign_port {AddrIn[25]} {TOP_IO_HT3_FB1_B6/C[7]}
+#assign_port {AddrIn[26]} {TOP_IO_HT3_FB1_B6/C[8]}
+#assign_port {AddrIn[27]} {TOP_IO_HT3_FB1_B6/C[9]}
+#assign_port {AddrIn[28]} {TOP_IO_HT3_FB1_B6/C[10]}
+#assign_port {AddrIn[29]} {TOP_IO_HT3_FB1_B6/C[11]}
 
 #assign_port {AddrIn[30]} {TOP_IO_HT3_FB1_B6/D[2]}
-assign_port {AddrIn[31]} {TOP_IO_HT3_FB1_B6/D[3]}
-assign_port {AddrIn[30]} {TOP_IO_HT3_FB1_B6/D[4]}
+#assign_port {AddrIn[31]} {TOP_IO_HT3_FB1_B6/D[3]}
+#assign_port {AddrIn[30]} {TOP_IO_HT3_FB1_B6/D[4]}
 
 

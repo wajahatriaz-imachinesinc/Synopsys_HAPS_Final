@@ -1,0 +1,8 @@
+#!/bin/bash
+# Source environment setup for ProtoCompiler
+source ./proto_env.bash
+
+# ProtoComp=/projects/prj_ae_disk/dtokhi/tools/protocomp/V-2025.06-2/bin/protocompiler100
+ProtoComp=protocompiler100
+
+eval $ProtoComp -license_feature FpgaInternalParts:haps200_compile -batch -tcl ./run.tcl

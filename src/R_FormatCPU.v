@@ -27,14 +27,13 @@
  * CAUTION: DONT MODIFY THE NAME AND I/O DECLARATION.
  */
 module top(
-	// Outputs
-	output	wire	[31:0]	AddrOut,
 	// Inputs
-	input	wire	[31:0]	AddrIn,
 	input	wire	clk,
 	input 	wire	reset_n
 );
-	wire [31:0] Instr;
+	// Internal address buses (not exposed as top-level I/O)
+	wire [31:0] AddrOut;
+	wire [31:0] AddrIn;
 	wire [31:0] ALU_result;
 	wire [31:0] RsData;
 	wire [31:0] RtData;

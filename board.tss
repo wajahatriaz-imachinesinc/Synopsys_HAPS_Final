@@ -1,36 +1,26 @@
 #HAPS System definition
-board_system_create -haps -name haps100
-board_system_create -add HAPS100_4F -name FB1 
+board_system_create -haps -name IM_HAPS200
+board_system_create -add HAPS200_6F_2 -name FB1 -stack_through none 		;# Primary module
 
-board_system_configure -clk_src FB1.PLL -name GCLK1 -frequency 22000
-#board_system_configure -clk_src FB1.PLL -name GCLK2 -frequency 20000
+############################
+#Clock connections from first system to others and loopback
+board_system_configure -connect {FB1.HC3_1 FB1.HC3_1}
+############################
 
-board_system_configure -clock FB1.uA.CLK1 GCLK1
-board_system_configure -clock FB1.uB.CLK1 GCLK1
-#board_system_configure -clock FB1.uA.CLK2 GCLK2
-#board_system_configure -clock FB1.uB.CLK2 GCLK2
+# Global clock - User design clock (22 MHz)
+board_system_configure -clk_src PLL -frequency 22M -name GCLK_USER_CLK
 
-#TOP Level IO creation
-board_system_configure -top_io {FB1.B5 FB1.B6 FB1.B7}
+# Clock assignments for 2 FPGAs (F0, F1)
+board_system_configure -clock {FB1.F0.CLK1} GCLK_USER_CLK
+board_system_configure -clock {FB1.F1.CLK1} GCLK_USER_CLK
 
+# Commented for future use:
+# board_system_configure -clk_src PLL -frequency 20M -name GCLK_AUX_CLK
+# board_system_configure -clock {FB1.F0.CLK2} GCLK_AUX_CLK
+# board_system_configure -clock {FB1.F1.CLK2} GCLK_AUX_CLK
 
-#TOP IO VCCO
-board_system_configure -voltage {FB1.B5 FB1.B6 FB1.B7} 1.8
+# Inter-FPGA connections (F0 <-> F1 for control signals)
+board_system_create -interconnect -manual CON_CABLE_25_HT3 -name FB1_F0_F1 -connector {FB1.F0_X4 FB1.F1_X29}
 
-#connection between uA and uB for counter control signals
-board_system_create -interconnect -manual CON_CABLE_50_HT3 -name FB1_A1_B19 -connector {FB1.A1 FB1.B19}
-board_system_create -interconnect -manual CON_CABLE_50_HT3 -name FB1_A2_B20 -connector {FB1.A2 FB1.B20}
-
-#board_system_create -interconnect -manual CON_CABLE_50_HT3 -name FB1_A3_B21 -connector {FB1.A3 FB1.B21}
-#board_system_create -interconnect -manual CON_CABLE_50_HT3 -name FB1_A4_B22 -connector {FB1.A4 FB1.B22}
-
-#HT3 VCCO
-board_system_configure -voltage {FB1.A1} 1.2
-board_system_configure -voltage {FB1.A2} 1.2
-board_system_configure -voltage {FB1.B19} 1.2
-board_system_configure -voltage {FB1.B20} 1.2
-
-#board_system_configure -voltage {FB1.A3} 1.2
-#board_system_configure -voltage {FB1.A4} 1.2
-#board_system_configure -voltage {FB1.B21} 1.2
-#board_system_configure -voltage {FB1.B22} 1.2
+# Interconnect VCCO (1.2V) for HapsTrak 3
+board_system_configure -voltage {FB1.F0_X4 FB1.F1_X29} 1.2
