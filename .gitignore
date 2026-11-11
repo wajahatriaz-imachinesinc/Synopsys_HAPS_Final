@@ -3,6 +3,7 @@ RCPU/
 RCPU_reports/
 pp0_area/
 synthesis_files/
+synlog/
 
 # Environment setup (machine-specific)
 proto_env.bash
@@ -26,12 +27,8 @@ version_info.txt
 *.rpt
 *.srr
 *.csv
-*.txt
-!README.md
-!design.fdc
-!board.tss
-!partition.pcf
-!run.tcl
+fpga_data.info
+AN.DB/
 
 # Vivado generated directories
 .Xil/
@@ -39,6 +36,7 @@ version_info.txt
 .ip_user_files/
 *.jou
 *.pb
+libnz4w_r.soLog/
 
 # Editor backups and temp files
 *~
@@ -54,3 +52,6 @@ xsim.dir/
 
 # Optional tool-specific
 .vivado_init.tcl
+
+# Session/compilation status files (auto-generated)
+COMPILATION_STATUS_*.txt
