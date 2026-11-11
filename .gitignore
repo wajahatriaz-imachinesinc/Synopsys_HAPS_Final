@@ -8,6 +8,9 @@ synlog/
 # Environment setup (machine-specific)
 proto_env.bash
 
+# Tool state/marker files
+.synthesis_compile
+
 # Generated bitstreams and build artifacts
 *.bit
 *.mcs
