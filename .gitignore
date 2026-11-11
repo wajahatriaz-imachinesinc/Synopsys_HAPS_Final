@@ -11,6 +11,13 @@ work.lib++/
 work/
 xsim.dir/
 
+# ModelSim/QuestaSim simulation artifacts
+vsim.wlf
+transcript
+*.cr.mti
+tcl_stacktrace.txt
+vish_stacktrace.vstf
+
 # Environment setup (machine-specific)
 proto_env.bash
 
